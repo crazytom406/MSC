@@ -1,0 +1,17 @@
+#include<iostream>
+using namespace std;
+float conversion(float val){
+    if(val<0.0){
+         return -val;
+    }
+}
+int conversion(int val){
+    if(val<0){
+        return -val;
+    }
+}
+int main(){
+    cout<<"call the float type function: "<<conversion(-1.2f)<<"\n";
+    cout<<"call the int function: "<<conversion(-5)<<"\n";
+    return 0;
+}
