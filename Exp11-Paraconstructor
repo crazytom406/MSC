@@ -1,0 +1,20 @@
+#include<iostream>
+using namespace std;
+class maths{
+    private:
+        int a,b,c;
+    public:
+        maths(int x,int y){
+            a=x;
+            b=y;
+        }
+    void add(){
+        c=a+b;
+        cout<<"Total is: "<<c;
+    }
+};
+ int main(){
+    maths obj(10,15);
+    obj.add();
+    return 0;
+}
