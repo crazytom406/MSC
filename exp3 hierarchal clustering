@@ -1,7 +1,0 @@
-set.seed(123)
-data<-matrix(rnorm(100),ncol=2)
-hierarchical_result<-hclust(dist(data))
-num_cluster<-3
-clusters<-cutree(hierarchical_result,k=num_cluster)
-plot(hierarchical_result,main="Hierarchical Clustering Dendrogram")
-plot(data,col=clusters,pch=19,main="Hierarchical Clustering Results")

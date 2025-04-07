@@ -1,0 +1,49 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    <%@ page import="java.text.DecimalFormat" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h2>Percentage Result</h2>
+<%
+// Retrieve marks from the request
+double subject1 = Double.parseDouble(request.getParameter("subject1"));
+double subject2 = Double.parseDouble(request.getParameter("subject2"));
+double subject3 = Double.parseDouble(request.getParameter("subject3"));
+// Calculate total marks and percentage
+double totalMarks = subject1 + subject2 + subject3;
+double percentage = (totalMarks / 300) * 100;
+// Format percentage with two decimal places
+DecimalFormat df = new DecimalFormat("0.00");
+String formattedPercentage = df.format(percentage);
+%>
+<p>Total Marks: <%= totalMarks %></p>
+<p>Percentage: <%= formattedPercentage %>%</p>
+
+</body>
+</html>
+
+//mark entry
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h2>Enter Marks for Each Subject</h2>
+<form action="calculatePercentage.jsp" method="post">
+Subject 1: <input type="text" name="subject1"><br>
+Subject 2: <input type="text" name="subject2"><br>
+Subject 3: <input type="text" name="subject3"><br>
+<br><input type="submit" value="Calculate Percentage">
+
+</body>
+</html>
+
