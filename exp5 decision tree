@@ -1,5 +1,0 @@
-library(rpart)
-data("iris")
-model<-rpart(Species~.,data=iris,method="class")
-plot(model,uniform=TRUE,branch=0.8,margin=0.1)
-text(model,use.n=TRUE,cex=0.8)
