@@ -1,0 +1,58 @@
+//create  interface TimeServer
+package rmi;
+
+import java.rmi.Remote;
+import java.rmi.RemoteException;
+
+public interface TimeServer extends Remote {
+    String getTime() throws RemoteException;
+}
+
+//create a class TimeServerImpl
+package rmi;
+import java.rmi.RemoteException;
+import java.rmi.server.*;
+import java.util.Date;
+
+public class TimeServerImpl extends UnicastRemoteObject implements TimeServer {
+    
+    public TimeServerImpl() throws RemoteException {
+        super();
+    }
+
+    public String getTime() throws RemoteException {
+        return new Date().toString();
+    }
+}
+
+//create a java class TimeServerServer
+package rmi;
+import java.rmi.*;
+
+public class TimeServerServer {
+    public static void main(String args[]) {
+        try {
+            TimeServer ts = new TimeServerImpl();
+            Naming.rebind("TimeServer", ts);
+            System.out.println("Time Server is Ready...");
+        } catch(Exception e) {
+            System.out.println(e);
+        }
+    }
+}
+
+//create a java class TimeServerClient
+package rmi;
+
+import java.rmi.*;
+
+public class TimeServerClient {
+    public static void main(String args[]) {
+        try {
+            TimeServer ts = (TimeServer) Naming.lookup("rmi://localhost/TimeServer");
+            System.out.println("Current Time from Server: " + ts.getTime());
+        } catch(Exception e) {
+            System.out.println(e);
+        }
+    }
+}
