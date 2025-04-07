@@ -1,0 +1,55 @@
+package pr8;
+
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Enumeration;
+
+
+@WebServlet("/headertableservlet")
+public class headertableservlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+   
+    public headertableservlet() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// Set response content type
+					response.setContentType("text/html");
+					// Get PrintWriter object to write the HTML response
+					PrintWriter out = response.getWriter();
+					// Start HTML document
+					out.println("<html><body>");
+					out.println("<h2>HTTP Request Headers</h2>");
+					// Retrieve and display request headers
+					out.println("<table border='1'>");
+					out.println("<tr><th>Header Name</th><th>Header Value</th></tr>");
+					Enumeration<String> headerNames = request.getHeaderNames();
+					while (headerNames.hasMoreElements()) {
+					String headerName = headerNames.nextElement();
+					String headerValue = request.getHeader(headerName);
+					out.println("<tr><td>" + headerName + "</td><td>" + headerValue + "</td></tr>");
+					}
+					out.println("</table>");
+					// End HTML document
+					out.println("</body></html>");
+					}
+
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
+}
