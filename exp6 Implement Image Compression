@@ -1,0 +1,46 @@
+clc; clear; close all;
+
+% Load built-in MATLAB image 
+I = imread('cameraman.tif'); 
+
+% Display original image 
+subplot(2, 2, 1); 
+imshow(I); 
+title('Original Image'); 
+
+% Convert image to double precision 
+I_double = double(I); 
+
+% Apply 2D Discrete Cosine Transform (DCT) 
+DCT = dct2(I_double); 
+
+% Set compression ratio (higher ratio = more loss)
+compression_ratio = 0.5; 
+
+% Determine threshold for quantization 
+threshold = compression_ratio * max(DCT(:)); 
+
+% Quantize DCT coefficients 
+DCT_quantized = DCT .* (abs(DCT) >= threshold); 
+
+% Inverse DCT to reconstruct compressed image 
+I_compressed = idct2(DCT_quantized); 
+
+% Convert back to uint8 for display 
+I_compressed_uint8 = uint8(I_compressed); 
+
+% Display compressed image 
+subplot(2, 2, 2); 
+imshow(I_compressed_uint8); 
+title('Compressed Image'); 
+
+% Calculate compression ratio 
+original_size = numel(I); 
+compressed_size = nnz(DCT_quantized); % count non-zero values
+compression_ratio_actual = original_size / compressed_size; 
+
+% Display compression ratio text 
+subplot(2, 2, 3:4); 
+text(0.5, 0.5, sprintf('Compression Ratio: %.2f', compression_ratio_actual), ...
+    'FontSize', 14, 'HorizontalAlignment', 'center'); 
+axis off;
