@@ -1,0 +1,42 @@
+% Load built-in MATLAB image 
+I = imread('cameraman.tif'); 
+% Convert to grayscale if RGB 
+if size(I, 3) == 3 
+    I = rgb2gray(I); 
+end 
+ 
+% Display original image 
+subplot(2, 3, 1); 
+imshow(I); 
+title('Original Image'); 
+% Roberts Operator 
+roberts_h = [1 0; 0 -1]; 
+roberts_v = [0 1; -1 0]; 
+I_roberts_h = imfilter(double(I), roberts_h); 
+I_roberts_v = imfilter(double(I), roberts_v); 
+I_roberts = sqrt(I_roberts_h.^2 + I_roberts_v.^2); 
+subplot(2, 3, 2); 
+imshow(uint8(I_roberts)); 
+title('Roberts Operator'); 
+% Prewitt Operator 
+prewitt_h = fspecial('prewitt'); 
+prewitt_v = prewitt_h'; 
+I_prewitt_h = imfilter(double(I), prewitt_h); 
+I_prewitt_v = imfilter(double(I), prewitt_v); 
+I_prewitt = sqrt(I_prewitt_h.^2 + I_prewitt_v.^2); 
+subplot(2, 3, 3); 
+imshow(uint8(I_prewitt)); 
+title('Prewitt Operator'); 
+ % Sobel Operator 
+sobel_h = fspecial('sobel'); 
+sobel_v = sobel_h'; 
+I_sobel_h = imfilter(double(I), sobel_h); 
+I_sobel_v = imfilter(double(I), sobel_v); 
+I_sobel = sqrt(I_sobel_h.^2 + I_sobel_v.^2); 
+subplot(2, 3, 4); 
+imshow(uint8(I_sobel)); 
+title('Sobel Operator'); 
+% Display original image for comparison 
+subplot(2, 3, 5); 
+imshow(I); 
+title('Original Image'); 
