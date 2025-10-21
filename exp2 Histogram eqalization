@@ -1,0 +1,32 @@
+% Read a built-in grayscale image (e.g., cameraman) 
+input_image = imread('cameraman.tif'); 
+% Display the input image 
+figure; 
+imshow(input_image); 
+title('Input Grayscale Image'); 
+ % Compute the histogram of the input image 
+input_histogram = imhist(input_image); 
+% Perform histogram equalization 
+output_image = histeq(input_image); 
+ % Compute the histogram of the output image 
+output_histogram = imhist(output_image); 
+ % Display the output image after histogram equalization 
+figure; 
+imshow(output_image); 
+title('Output Image after Histogram Equalization'); 
+% Plot the histograms of the input and output images 
+figure; 
+subplot(2, 1, 1); 
+bar(input_histogram); 
+title('Histogram of Input Image'); 
+xlabel('Pixel Intensity'); 
+ylabel('Frequency'); 
+subplot(2, 1, 2); 
+bar(output_histogram); 
+title('Histogram of Output Image'); 
+xlabel('Pixel Intensity'); 
+ylabel('Frequency'); 
+% Optionally, save the output image 
+output_filename = 'output_image_histogram_equalized.tif'; 
+imwrite(output_image, output_filename); 
+fprintf('Output image saved as: %s\n', output_filename);
