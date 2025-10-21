@@ -1,0 +1,54 @@
+% Load built-in MATLAB image 
+I = imread('peppers.png'); 
+ 
+% Convert to grayscale if the image is RGB 
+if size(I, 3) == 3 
+    I = rgb2gray(I); 
+end 
+ 
+% Display original image 
+subplot(3, 3, 1); 
+imshow(I); 
+title('Original Image'); 
+ 
+% 1. Histogram Equalization 
+J1 = histeq(I); 
+subplot(3, 3, 2); 
+imshow(J1); 
+title('Histogram Equalization'); 
+% 2. Contrast Stretching 
+low_in = 0; high_in = 100;  % Input range 
+low_out = 0; high_out = 255;  % Output range 
+J2 = imadjust(I, [low_in/255, high_in/255], [low_out/255, high_out/255]); 
+subplot(3, 3, 3); 
+imshow(J2); 
+title('Contrast Stretching'); 
+ 
+% 3. Spatial Filtering (Median Filtering) 
+J3 = medfilt2(I); 
+subplot(3, 3, 4); 
+imshow(J3); 
+title('Median Filtering'); 
+ 
+% 4. Sharpening 
+J4 = imsharpen(I); 
+subplot(3, 3, 5); 
+imshow(J4); 
+title('Sharpening'); 
+ 
+% 5. Adaptive Histogram Equalization 
+J5 = adapthisteq(I); 
+subplot(3, 3, 6); 
+imshow(J5); 
+title('Adaptive Histogram Equalization'); 
+ 
+% Show histograms 
+subplot(3, 3, 7); 
+imhist(I); 
+title('Original Image Histogram'); 
+subplot(3, 3, 8); 
+imhist(J1); 
+title('Histogram Equalization Histogram'); 
+subplot(3, 3, 9); 
+imhist(J5); 
+title('Adaptive Histogram Equalization Histogram');
