@@ -1,0 +1,31 @@
+% Load built-in MATLAB image 
+I = imread('cameraman.tif'); 
+% Convert to grayscale if RGB 
+if size(I, 3) == 3 
+    I = rgb2gray(I); 
+end 
+% Perform edge detection using Canny, Sobel, Prewitt, and Roberts operators 
+edges_canny = edge(I, 'Canny'); 
+edges_sobel = edge(I, 'Sobel'); 
+edges_prewitt = edge(I, 'Prewitt'); 
+edges_roberts = edge(I, 'Roberts'); 
+% Display original image and edges detected using different operators 
+subplot(2, 3, 1); 
+imshow(I); 
+title('Original Image'); 
+ 
+subplot(2, 3, 2); 
+imshow(edges_canny); 
+title('Edges (Canny)'); 
+ 
+subplot(2, 3, 3); 
+imshow(edges_sobel); 
+title('Edges (Sobel)'); 
+ 
+subplot(2, 3, 4); 
+imshow(edges_prewitt); 
+title('Edges (Prewitt)'); 
+ 
+subplot(2, 3, 5); 
+imshow(edges_roberts); 
+title('Edges (Roberts)');
