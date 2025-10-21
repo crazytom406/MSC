@@ -1,0 +1,50 @@
+% Read a built-in image (e.g., cameraman) 
+input_image = imread('cameraman.tif'); 
+ % Display the input image 
+figure; 
+imshow(input_image); 
+title('Input Image (Cameraman)'); 
+  % Apply different image filtering techniques 
+  % 1. Average filtering 
+average_filtered_image = imfilter(input_image, fspecial('average', [3, 3])); 
+ 
+% 2. Gaussian filtering 
+gaussian_filtered_image = imgaussfilt(input_image, 1); 
+ 
+% 3. Median filtering 
+median_filtered_image = medfilt2(input_image, [3, 3]); 
+ 
+% 4. Sobel edge detection 
+sobel_edge_image = edge(input_image, 'sobel'); 
+ 
+ % 5. Laplacian edge detection 
+laplacian_edge_image = edge(input_image, 'log'); 
+ 
+ % Display the filtered images 
+figure; 
+subplot(2, 3, 1); 
+imshow(average_filtered_image); 
+title('Average Filtered Image'); 
+ 
+subplot(2, 3, 2); 
+imshow(gaussian_filtered_image); 
+title('Gaussian Filtered Image'); 
+ 
+subplot(2, 3, 3); 
+imshow(median_filtered_image); 
+title('Median Filtered Image'); 
+ 
+subplot(2, 3, 4); 
+imshow(sobel_edge_image); 
+title('Sobel Edge Detection'); 
+ 
+subplot(2, 3, 5); 
+imshow(laplacian_edge_image); 
+title('Laplacian Edge Detection'); 
+ 
+% Optionally, save the filtered images 
+imwrite(average_filtered_image, 'average_filtered_image.tif'); 
+imwrite(gaussian_filtered_image, 'gaussian_filtered_image.tif'); 
+imwrite(median_filtered_image, 'median_filtered_image.tif'); 
+imwrite(sobel_edge_image, 'sobel_edge_image.tif'); 
+imwrite(laplacian_edge_image, 'laplacian_edge_image.tif');
