@@ -1,0 +1,25 @@
+% Load built-in MATLAB image 
+I = imread('text.png'); 
+ % Convert to binary image (if necessary) 
+if size(I, 3) == 3 
+    I = rgb2gray(I); 
+end 
+bw = imbinarize(I); % Convert to binary image 
+ % Create structuring element (SE) 
+SE = strel('disk', 3); % Create disk-shaped SE with radius 3 
+ % Perform opening operation 
+I_opened = imopen(bw, SE); 
+ % Perform closing operation 
+I_closed = imclose(bw, SE); 
+ % Display original binary image and processed images 
+subplot(1, 3, 1); 
+imshow(bw); 
+title('Binary Image'); 
+ 
+subplot(1, 3, 2); 
+imshow(I_opened); 
+title('Opened Image'); 
+ 
+subplot(1, 3, 3); 
+imshow(I_closed); 
+title('Closed Image'); 
